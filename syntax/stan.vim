@@ -10,40 +10,17 @@ endif
 
 syntax case match
 
-" Comments
-syntax match stanComment contains=@Spell '//.*'
-syntax match stanComment contains=@Spell '\#.*'
-syntax region stanComment start="/\*" end="\*/" contains=@Spell
-
-" Numbers and values
-"" Integer with + - or nothing in front
-syntax match stanNumber '\d\+'
-syntax match stanNumber '[+-]\d\+'
-
-"" Floating point number with decimal no E or e (+, -)
-syntax match stanFloat '\d\+\.\d*'
-syntax match stanFloat '[-+]\d\+\.\d*'
-
-"" Floating point like number with E and no decimal point (+, -)
-syntax match stanFloat '[-+]\=\d[[:digit:]]*[eE][\-+]\=\d\+'
-syntax match stanFloat '\d[[:digit:]]*[eE][\-+]\=\d\+'
-
-"" Floating point like number with E and decimal point (+, -)
-syntax match stanFloat '[-+]\=\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
-syntax match stanFloat '\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
-
-" Booleans
-syntax keyword stanBoolean true false
-
 " Blocks
 syntax keyword stanBlock functions data parameters model
-syntax match stanBlock 'generated quantities'
-syntax match stanBlock 'transformed parameters'
-syntax match stanBlock 'transformed data'
+syntax match stanBlock "generated quantities"
+syntax match stanBlock "transformed parameters"
+syntax match stanBlock "transformed data"
 
 syntax keyword stanType int real vector simplex unit_vector ordered positive_ordered
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
+" FIXME is stanFunction the right group for these?
+syntax keyword stanFunction lower upper offset multiplier  
 
 " Distributions
 syntax keyword stanFunction bernoulli bernoulli_logit
@@ -207,7 +184,7 @@ syntax keyword stanFunction inv_wishart_lpdf inv_wishart_rng
 " Built in functions
 syntax keyword stanFunction print
 syntax keyword stanFunction abs int_step min max
-syntax keyword stanConstant pi sqrt2 log2 log10
+syntax keyword stanConstant pi sqrt2 log2 log10 positive_infinity negative_infinity
 syntax match stanConstant " e "  " TODO somehow match 'sensible' uses of e...
 syntax keyword stanFunction step is_inf is_nan fabs fdim fmin fmax fmod floor ceil round trunc
 syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv_sqrt inv_square
@@ -245,17 +222,22 @@ syntax keyword stanFunction map_rect
 
 " Control flow
 syntax keyword stanConditional if then else
-syntax keyword stanRepeat for in while repeat until
+syntax keyword stanRepeat for in while break continue
 
 " Operators
-syntax match stanOperator "[\+\-\*\^\~\?\:\']"
-syntax match stanOperator "\/ "  " FIXME Match only a single forward slash
-syntax match stanOperator "\.[*/]"
-syntax match stanOperator "<-"
-syntax match stanOperator "\\"
-
-" To do
-syntax keyword stanTodo TODO FIXME
+syntax match stanOperator "\v\+"
+syntax match stanOperator "\v\+\="
+syntax match stanOperator "\v\-"
+syntax match stanOperator "\v\*"
+syntax match stanOperator "\v\^"
+syntax match stanOperator "\v\~"
+syntax match stanOperator "\v\?"
+syntax match stanOperator "\v\:"
+syntax match stanOperator "\v\'"
+syntax match stanOperator "\v\/ "  " FIXME Match only a single forward slash
+syntax match stanOperator "\v\.[*/]"
+syntax match stanOperator "\v\<\-"
+syntax match stanOperator "\v\\"
 
 syntax match stanInclude "^\s*\#include"
 
@@ -275,6 +257,27 @@ syntax keyword stanCppConflict try typedef typeid typename union unsigned using
 syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
 
 syntax keyword stanKeyword target return
+
+" To do
+syntax keyword stanTodo TODO FIXME
+syntax cluster stanCommentGroup contains=stanTodo
+
+" Comments
+syntax match stanComment contains=@stanCommentGroup,@Spell "//.*"
+syntax match stanComment contains=@stanCommentGroup,@Spell "\#.*"
+syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spell
+
+" Numbers and values
+"" Integers
+syntax match stanNumber "\v-?\d+"
+
+"" Floating point
+syntax match stanFloat "\v-?\d+(\.\d*)?([eE][+\-]?\d+)?"
+
+"" Booleans
+syntax keyword stanBoolean true false
+
+syntax keyword stanException reject
 
 " Link
 highlight link stanComment Comment
