@@ -1,1 +1,1 @@
-au BufNewFile,BufRead *.stan,*.STAN setfiletype=stan
+autocmd BufNewFile,BufRead *.stan,*.STAN set filetype=stan

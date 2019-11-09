@@ -2,18 +2,19 @@
 " Language:	Stan (http://mc-stan.org)
 " Maintainer: George Ho (https://eigenfoo.xyz)
 " Last Change: November 8, 2019
-" Filenames: *.stan
-" URL:
+" Filenames: *.stan,*.STAN
 
-" For version 5.x: Clear all syntax items
-" For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
+if exists("b:current_syntax")
   finish
 endif
 
 syntax case match
+
+" Comments
+syntax match stanComment contains=@Spell '//.*'
+syntax match stanComment contains=@Spell '\#.*'
+"syntax region stanComment start='\/\*' end='\*\/' contains=@Spell
+syntax region stanComment start="/\*" end="\*/" contains=@Spell extend
 
 " Numbers and values
 "" Integer with + - or nothing in front
@@ -32,17 +33,177 @@ syntax match stanFloat '\d[[:digit:]]*[eE][\-+]\=\d\+'
 syntax match stanFloat '[-+]\=\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
 syntax match stanFloat '\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
 
+" Booleans
+syntax keyword stanBoolean true false
+
 " Blocks
 syntax keyword stanBlock functions data parameters model
 syntax match stanBlock 'generated quantities'
 syntax match stanBlock 'transformed parameters'
 syntax match stanBlock 'transformed data'
 
-" Data types
-syntax keyword stanType int real vector simplex ordered positive_ordered
-syntax keyword stanType row_vector matrix corr_matrix cov_matrix
+syntax keyword stanType int real vector simplex unit_vector ordered positive_ordered
+syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
+syntax keyword stanType corr_matrix cov_matrix
 
-" TODO Distributions
+" Distributions
+syntax keyword stanFunction bernoulli bernoulli_logit
+syntax keyword stanFunction bernoulli_lpmf bernoulli_cdf bernoulli_lcdf bernoulli_lccdf bernoulli_rng
+syntax keyword stanFunction bernoulli_logit_lpmf bernoulli_logit_rng
+
+syntax keyword stanFunction binomial binomial_logit
+syntax keyword stanFunction binomial_lpmf binomial_cdf binomial_lcdf binomial_lccdf binomial_rng
+syntax keyword stanFunction binomial_logit_lpmf
+
+syntax keyword stanFunction beta_binomial
+syntax keyword stanFunction beta_binomial_lpmf beta_binomial_cdf beta_binomial_lcdf beta_binomial_lccdf beta_binomial_rng
+
+syntax keyword stanFunction hypergeometric
+syntax keyword stanFunction hypergeometric_lpmf hypergeometric_rng
+
+syntax keyword stanFunction categorical categorical_logit
+syntax keyword stanFunction categorical_lpmf categorical_logit_lpmf categorical_rng categorical_logit_rng
+
+syntax keyword stanFunction ordered_logistic
+syntax keyword stanFunction ordered_logistic_lpmf ordered_logistic_rng
+
+syntax keyword stanFunction ordered_probit
+syntax keyword stanFunction ordered_probit_lpmf ordered_probit_rng
+
+syntax keyword stanFunction neg_binomial
+syntax keyword stanFunction neg_binomial_lpmf neg_binomial_cdf neg_binomial_lcdf neg_binomial_lccdf neg_binomial_rng
+
+syntax keyword stanFunction neg_binomial_2
+syntax keyword stanFunction neg_binomial_2_lpmf neg_binomial_2_cdf neg_binomial_2_lcdf neg_binomial_2_lccdf neg_binomial_2_rng
+
+syntax keyword stanFunction neg_binomial_2_log
+syntax keyword stanFunction neg_binomial_2_log_lpmf neg_binomial_2_log_rng
+
+syntax keyword stanFunction poisson
+syntax keyword stanFunction poisson_lpmf poisson_cdf poisson_lcdf poisson_lccdf poisson_rng
+
+syntax keyword stanFunction poisson_log
+syntax keyword stanFunction poisson_log_lpmf poisson_log_rng
+
+syntax keyword stanFunction multinomial
+syntax keyword stanFunction multinomial_lpmf multinomial_rng
+
+syntax keyword stanFunction normal
+syntax keyword stanFunction normal_lpdf normal_cdf normal_lcdf normal_lccdf normal_rng
+
+syntax keyword stanFunction std_normal
+syntax keyword stanFunction std_normal_lpdf
+
+syntax keyword stanFunction normal_id_glm
+syntax keyword stanFunction normal_id_glm_lpdf
+
+syntax keyword stanFunction exp_mod_normal
+syntax keyword stanFunction exp_mod_normal_lpdf exp_mod_normal_cdf exp_mod_normal_lcdf exp_mod_normal_lccdf exp_mod_normal_rng
+
+syntax keyword stanFunction skew_normal
+syntax keyword stanFunction skew_normal_lpdf skew_normal_cdf skew_normal_lcdf skew_normal_lccdf skew_normal_rng
+
+syntax keyword stanFunction student_t
+syntax keyword stanFunction student_t_lpdf student_t_cdf student_t_lcdf student_t_lccdf student_t_rng
+
+syntax keyword stanFunction cauchy
+syntax keyword stanFunction cauchy_lpdf cauchy_cdf cauchy_lcdf cauchy_lccdf cauchy_rng
+
+syntax keyword stanFunction double_exponential
+syntax keyword stanFunction double_exponential_lpdf double_exponential_cdf double_exponential_lcdf double_exponential_lccdf double_exponential_rng
+
+syntax keyword stanFunction logistic
+syntax keyword stanFunction logistic_lpdf logistic_cdf logistic_lcdf logistic_lccdf logistic_rng
+
+syntax keyword stanFunction gumbel
+syntax keyword stanFunction gumbel_lpdf gumbel_cdf gumbel_lcdf gumbel_lccdf gumbel_rng
+
+syntax keyword stanFunction lognormal
+syntax keyword stanFunction lognormal_lpdf lognormal_cdf lognormal_lcdf lognormal_lccdf lognormal_rng
+
+syntax keyword stanFunction chi_square
+syntax keyword stanFunction chi_square_lpdf chi_square_cdf chi_square_lcdf chi_square_lccdf chi_square_rng
+
+syntax keyword stanFunction inv_chi_square
+syntax keyword stanFunction inv_chi_square_lpdf inv_chi_square_cdf inv_chi_square_lcdf inv_chi_square_lccdf inv_chi_square_rng
+
+syntax keyword stanFunction scaled_inv_chi_square
+syntax keyword stanFunction scaled_inv_chi_square_lpdf scaled_inv_chi_square_cdf scaled_inv_chi_square_lcdf scaled_inv_chi_square_lccdf scaled_inv_chi_square_rng
+
+syntax keyword stanFunction exponential
+syntax keyword stanFunction exponential_lpdf exponential_cdf exponential_lcdf exponential_lccdf exponential_rng
+
+syntax keyword stanFunction gamma
+syntax keyword stanFunction gamma_lpdf gamma_cdf gamma_lcdf gamma_lccdf gamma_rng
+
+syntax keyword stanFunction inv_gamma
+syntax keyword stanFunction inv_gamma_lpdf inv_gamma_cdf inv_gamma_lcdf inv_gamma_lccdf inv_gamma_rng
+
+syntax keyword stanFunction weibull
+syntax keyword stanFunction weibull_lpdf weibull_cdf weibull_lcdf weibull_lccdf weibull_rng
+
+syntax keyword stanFunction frechet
+syntax keyword stanFunction frechet_lpdf frechet_cdf frechet_lcdf frechet_lccdf frechet_rng
+
+syntax keyword stanFunction rayleigh
+syntax keyword stanFunction rayleigh_lpdf rayleigh_cdf rayleigh_lcdf rayleigh_lccdf rayleigh_rng
+
+syntax keyword stanFunction wiener
+syntax keyword stanFunction wiener_lpdf
+
+syntax keyword stanFunction pareto
+syntax keyword stanFunction pareto_lpdf pareto_cdf pareto_lcdf pareto_lccdf pareto_rng
+
+syntax keyword stanFunction pareto_type_2
+syntax keyword stanFunction pareto_type_2_lpdf pareto_type_2_cdf pareto_type_2_lcdf pareto_type_2_lccdf pareto_type_2_rng
+
+syntax keyword stanFunction beta
+syntax keyword stanFunction beta_lpdf beta_cdf beta_lcdf beta_lccdf beta_rng
+
+syntax keyword stanFunction beta_proportion
+syntax keyword stanFunction beta_proportion_lpdf beta_proportion_cdf beta_proportion_lcdf beta_proportion_lccdf beta_proportion_rng
+
+syntax keyword stanFunction von_mises
+syntax keyword stanFunction von_mises_lpdf von_mises_rng
+
+syntax keyword stanFunction uniform
+syntax keyword stanFunction uniform_lpdf uniform_cdf uniform_lcdf uniform_lccdf uniform_rng
+
+syntax keyword stanFunction multi_normal
+syntax keyword stanFunction multi_normal_lpdf multi_normal_rng
+
+syntax keyword stanFunction multi_normal_prec
+syntax keyword stanFunction multi_normal_prec_lpdf
+
+syntax keyword stanFunction multi_normal_cholesky
+syntax keyword stanFunction multi_normal_cholesky_lpdf multi_normal_cholesky_rng
+
+syntax keyword stanFunction multi_gp
+syntax keyword stanFunction multi_gp_lpdf
+
+syntax keyword stanFunction multi_gp_cholesky
+syntax keyword stanFunction multi_gp_cholesky_lpdf
+
+syntax keyword stanFunction multi_student_t
+syntax keyword stanFunction multi_student_t_lpdf multi_student_t_rng
+
+syntax keyword stanFunction gaussian_dlm_obs
+syntax keyword stanFunction gaussian_dlm_obs_lpdf
+
+syntax keyword stanFunction dirichlet
+syntax keyword stanFunction dirichlet_lpdf dirichlet_rng
+
+syntax keyword stanFunction lkj_corr
+syntax keyword stanFunction lkj_corr_lpdf lkj_corr_rng
+
+syntax keyword stanFunction lkj_corr_cholesky
+syntax keyword stanFunction lkj_corr_cholesky_lpdf lkj_corr_cholesky_rng
+
+syntax keyword stanFunction wishart
+syntax keyword stanFunction wishart_lpdf wishart_rng
+
+syntax keyword stanFunction inv_wishart
+syntax keyword stanFunction inv_wishart_lpdf inv_wishart_rng
 
 " Built in functions
 syntax keyword stanFunction abs fabs fdim fmin fmax fmod floor ceil round trunc
@@ -77,17 +238,44 @@ syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_arr
 syntax keyword stanFunction increment_log_prob
 
 " Control flow
-syntax keyword stanConditional if else
-syntax keyword stanRepeat for in while
+syntax keyword stanConditional if then else
+syntax keyword stanRepeat for in while repeat until
+
+" Operators
+syntax match stanOperator "[\+\-\*\^\~\?\:\']"
+syntax match stanOperator "\/ "  " FIXME Match only a single forward slash
+syntax match stanOperator "\.[*/]"
+syntax match stanOperator "<-"
+syntax match stanOperator "\\"
 
 " To do
-syntax keyword	stanTodo TODO FIXME
+syntax keyword stanTodo TODO FIXME
 
-" Highlight
+syntax match stanInclude "^\s*\#include"
+
+syntax keyword stanKeyword target
+
+" Removed some, since they're highlighted in other places
+syntax keyword stanCppConflict var fvar STAN_MAJOR STAN_MINOR STAN_PATCH STAN_MATH_MAJOR STAN_MATH_MINOR STAN_MATH_PATCH
+syntax keyword stanCppConflict alignas alignof and_eq asm auto bitand bitor bool
+syntax keyword stanCppConflict break case catch char char16_t char32_t class compl
+syntax keyword stanCppConflict const constexpr const_cast continue decltype default
+syntax keyword stanCppConflict delete do double dynamic_cast enum explicit
+syntax keyword stanCppConflict export extern float friend goto
+syntax keyword stanCppConflict inline long mutable namespace new noexcept
+syntax keyword stanCppConflict not not_eq nullptr operator or or_eq private
+syntax keyword stanCppConflict protected public register reinterpret_cast
+syntax keyword stanCppConflict short signed sizeof static static_assert static_cast
+syntax keyword stanCppConflict struct switch template this thread_local throw true
+syntax keyword stanCppConflict try typedef typeid typename union unsigned using
+syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
+
+" Link
 highlight link stanComment Comment
 highlight link stanConstant Constant
 highlight link stanNumber Number
 highlight link stanFloat Float
+highlight link stanBoolean Boolean
 highlight link stanFunction Function
 highlight link stanConditional Conditional
 highlight link stanRepeat Repeat
@@ -95,6 +283,7 @@ highlight link stanLabel Label
 highlight link stanOperator Operator
 highlight link stanBlock Keyword
 highlight link stanKeyword Keyword
+highlight link stanCppConflict Error
 highlight link stanException Exception
 highlight link stanInclude Include
 highlight link stanType Type
