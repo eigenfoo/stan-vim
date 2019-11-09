@@ -13,8 +13,7 @@ syntax case match
 " Comments
 syntax match stanComment contains=@Spell '//.*'
 syntax match stanComment contains=@Spell '\#.*'
-"syntax region stanComment start='\/\*' end='\*\/' contains=@Spell
-syntax region stanComment start="/\*" end="\*/" contains=@Spell extend
+syntax region stanComment start="/\*" end="\*/" contains=@Spell
 
 " Numbers and values
 "" Integer with + - or nothing in front
