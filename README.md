@@ -37,7 +37,9 @@ Plugin 'eigenfoo/stan-vim'
 ```
 
 **For Vundle versions < 0.10.2,** replace `Plugin` with `Bundle` above.
+
 **For NeoBundle users,** replace `Plugin` with `NeoBundle` above.
+
 **For VimPlug users,** replace `Plugin` with `Plug` above.
 
 ### Pathogen
