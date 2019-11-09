@@ -1,4 +1,8 @@
-" Indentation for Elm (http://elm-lang.org/)
+" Indentation file for the Stan probabilistic programming language
+" Language: Stan (http://mc-stan.org)
+" Maintainer: George Ho (https://eigenfoo.xyz)
+" Last Change: November 8, 2019
+" Filenames: *.stan
 
 "" Only load this indent file when no other was loaded.
 if exists('b:did_indent')

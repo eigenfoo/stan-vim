@@ -1,4 +1,4 @@
-" Vim syntax file for the Stan probabilistic programming language
+" Syntax file for the Stan probabilistic programming language
 " Language: Stan (http://mc-stan.org)
 " Maintainer: George Ho (https://eigenfoo.xyz)
 " Last Change: November 8, 2019
@@ -20,7 +20,6 @@ syntax keyword stanType int real vector simplex unit_vector ordered positive_ord
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
 " FIXME is stanFunction the right group for these?
-syntax keyword stanFunction lower upper offset multiplier  
 
 " Distributions
 syntax keyword stanFunction bernoulli bernoulli_logit
@@ -184,8 +183,7 @@ syntax keyword stanFunction inv_wishart_lpdf inv_wishart_rng
 " Built in functions
 syntax keyword stanFunction print
 syntax keyword stanFunction abs int_step min max
-syntax keyword stanConstant pi sqrt2 log2 log10 positive_infinity negative_infinity
-syntax match stanConstant " e "  " TODO somehow match 'sensible' uses of e...
+syntax keyword stanConstant pi e sqrt2 log2 log10 positive_infinity negative_infinity
 syntax keyword stanFunction step is_inf is_nan fabs fdim fmin fmax fmod floor ceil round trunc
 syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv_sqrt inv_square
 syntax keyword stanFunction cos sin tan acos asin atan atan2
@@ -256,11 +254,14 @@ syntax keyword stanCppConflict struct switch template this thread_local throw tr
 syntax keyword stanCppConflict try typedef typeid typename union unsigned using
 syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
 
-syntax keyword stanKeyword target return
+syntax keyword stanOperator return
+syntax keyword stanSpecial target lower upper offset multiplier
 
 " To do
 syntax keyword stanTodo TODO FIXME
-syntax cluster stanCommentGroup contains=stanTodo
+syntax match stanFuncDoc "@param"
+syntax match stanFuncDoc "@return"
+syntax cluster stanCommentGroup contains=stanTodo,stanFuncDoc
 
 " Comments
 syntax match stanComment contains=@stanCommentGroup,@Spell "//.*"
@@ -285,10 +286,10 @@ highlight link stanConstant Constant
 highlight link stanNumber Number
 highlight link stanFloat Float
 highlight link stanBoolean Boolean
+highlight link stanSpecial Special
 highlight link stanFunction Function
 highlight link stanConditional Conditional
 highlight link stanRepeat Repeat
-highlight link stanLabel Label
 highlight link stanOperator Operator
 highlight link stanBlock Keyword
 highlight link stanKeyword Keyword
@@ -297,5 +298,6 @@ highlight link stanException Exception
 highlight link stanInclude Include
 highlight link stanType Type
 highlight link stanTodo Todo
+highlight link stanFuncDoc Keyword
 
 let b:current_syntax = "stan"

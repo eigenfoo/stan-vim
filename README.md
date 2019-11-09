@@ -23,7 +23,7 @@ language](https://mc-stan.org/).
 
 ### Vundle, NeoBundle and VimPlug
 
-**For Vundle users,** place this in your `.vimrc`:
+_For Vundle users,_ place this in your `.vimrc`:
 
 ```
 Plugin 'eigenfoo/stan-vim'
@@ -36,11 +36,11 @@ Plugin 'eigenfoo/stan-vim'
 :PluginInstall
 ```
 
-**For Vundle versions < 0.10.2,** replace `Plugin` with `Bundle` above.
+_For Vundle versions < 0.10.2,_ replace `Plugin` with `Bundle` above.
 
-**For NeoBundle users,** replace `Plugin` with `NeoBundle` above.
+_For NeoBundle users,_ replace `Plugin` with `NeoBundle` above.
 
-**For VimPlug users,** replace `Plugin` with `Plug` above.
+_For VimPlug users,_ replace `Plugin` with `Plug` above.
 
 ### Pathogen
 
