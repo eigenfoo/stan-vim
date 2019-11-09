@@ -206,36 +206,43 @@ syntax keyword stanFunction inv_wishart
 syntax keyword stanFunction inv_wishart_lpdf inv_wishart_rng
 
 " Built in functions
-syntax keyword stanFunction abs fabs fdim fmin fmax fmod floor ceil round trunc
-syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv inv_sqrt inv_square
-syntax keyword stanFunction hypot cos sin tan acos asin atan atan2 cosh sinh tanh acosh asinh atanh
+syntax keyword stanFunction print
+syntax keyword stanFunction abs int_step min max
+syntax keyword stanConstant pi sqrt2 log2 log10
+syntax match stanConstant " e "  " TODO somehow match 'sensible' uses of e...
+syntax keyword stanFunction step is_inf is_nan fabs fdim fmin fmax fmod floor ceil round trunc
+syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv_sqrt inv_square
+syntax keyword stanFunction cos sin tan acos asin atan atan2
+syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
 syntax keyword stanFunction erf erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
-syntax keyword stanFunction lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q
-syntax keyword stanFunction binomial_coefficient_log bessel_first_kind bessel_second_kind
-syntax keyword stanFunction log_falling_factorial rising_factorial log_rising_factorial
-syntax keyword stanFunction expml fma multiply_log log1p log1m log1p_exp log1m_exp log_diff_exp
-syntax keyword stanFunction log_mix log_sum_exp log_inv_logit log1m_inv_logit
+syntax keyword stanFunction inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
+syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind modified_bessel_second_kind
+syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
+syntax keyword stanFunction expm1 fma lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
 syntax keyword stanFunction min max sum prod log_sum_exp mean variance sd distance squared_distance
-syntax keyword stanFunction dims num_elements size rep_array
+syntax keyword stanFunction dims num_elements size
+syntax keyword stanFunction rep_array
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
-syntax keyword stanFunction num_elments rows cols
-syntax keyword stanFunction dot_product columns_dot_product rows_dot_product dot_self
-syntax keyword stanFunction columns_dot_self rows_dot_self tcrossprod crossprod
-syntax keyword stanFunction quad_form quad_form_diag quad_form_sym trace_quad_form trace_gen_quad_form
+syntax keyword stanFunction num_elements rows cols
+syntax keyword stanFunction dot_product columns_dot_product rows_dot_product dot_self columns_dot_self rows_dot_self
+syntax keyword stanFunction tcrossprod crossprod quad_form quad_form_diag quad_form_sym trace_quad_form trace_gen_quad_form
 syntax keyword stanFunction multiply_lower_tri_self_transpose diag_pre_multiply diag_post_multiply
-syntax keyword stanFunction rep_vector rep_row_vector rep_matrix diagonal diag_matrix
-syntax keyword stanFunction col row block sub_col sub_row head tail segment 
-syntax keyword stanFunction append_col append_row
+syntax keyword stanFunction rep_vector rep_row_vector rep_matrix
+syntax keyword stanFunction diagonal diag_matrix
+syntax keyword stanFunction col row block sub_col sub_row head tail segment
 syntax keyword stanFunction softmax log_softmax cumulative_sum
-syntax keyword stanFunction mdivide_right_tri_low mdivide_left_tri_low
-syntax keyword stanFunction trace determinant log_determinant
-syntax keyword stanFunction inverse inverse_spd eignvalues_sym eigenvectors_sym qr_Q qr_R
-syntax keyword stanFunction cholesky_decompose singular_values
+syntax keyword stanFunction cov_exp_quad
+syntax keyword stanFunction mdivide_left_tri_low mdivide_right_tri_low mdivide_left_spd mdivide_right_spd
+syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply trace determinant log_determinant
+syntax keyword stanFunction inverse inverse_spd eigenvalues_sym eigenvectors_sym qr_thin_Q qr_thin_R qr_Q qr_R cholesky_decompose singular_values
+syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix
-syntax keyword stanFunction csr_matrix_times_vector
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
-syntax keyword stanFunction increment_log_prob
+syntax keyword stanFunction algebra_solver
+syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf
+syntax keyword stanFunction integrate_1d integrate\_1d
+syntax keyword stanFunction map_rect
 
 " Control flow
 syntax keyword stanConditional if then else
@@ -253,8 +260,6 @@ syntax keyword stanTodo TODO FIXME
 
 syntax match stanInclude "^\s*\#include"
 
-syntax keyword stanKeyword target
-
 " Removed some, since they're highlighted in other places
 syntax keyword stanCppConflict var fvar STAN_MAJOR STAN_MINOR STAN_PATCH STAN_MATH_MAJOR STAN_MATH_MINOR STAN_MATH_PATCH
 syntax keyword stanCppConflict alignas alignof and_eq asm auto bitand bitor bool
@@ -269,6 +274,8 @@ syntax keyword stanCppConflict short signed sizeof static static_assert static_c
 syntax keyword stanCppConflict struct switch template this thread_local throw true
 syntax keyword stanCppConflict try typedef typeid typename union unsigned using
 syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
+
+syntax keyword stanKeyword target return
 
 " Link
 highlight link stanComment Comment
