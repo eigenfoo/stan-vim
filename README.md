@@ -3,6 +3,9 @@
 A Vim plugin for the [Stan probabilistic programming
 language](https://mc-stan.org/).
 
+![Screenshot of stan-vim syntax
+highlighting](https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot.png)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -23,7 +26,7 @@ language](https://mc-stan.org/).
 
 ### Vundle, NeoBundle and VimPlug
 
-_For Vundle users,_ place this in your `.vimrc`:
+For Vundle users, place this in your `.vimrc`:
 
 ```
 Plugin 'eigenfoo/stan-vim'
@@ -36,11 +39,11 @@ Plugin 'eigenfoo/stan-vim'
 :PluginInstall
 ```
 
-_For Vundle versions < 0.10.2,_ replace `Plugin` with `Bundle` above.
+For Vundle versions < 0.10.2, replace `Plugin` with `Bundle` above.
 
-_For NeoBundle users,_ replace `Plugin` with `NeoBundle` above.
+For NeoBundle users, replace `Plugin` with `NeoBundle` above.
 
-_For VimPlug users,_ replace `Plugin` with `Plug` above.
+For VimPlug users, replace `Plugin` with `Plug` above.
 
 ### Pathogen
 
