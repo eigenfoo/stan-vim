@@ -289,11 +289,10 @@ syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spel
 syntax match stanInclude "\v^\s*\#include"
 
 " Literals
-"" Integers
-syntax match stanNumber "\v-?\d+"
-
-"" Floats
-syntax match stanFloat "\v-?\d+(\.\d*)?([eE][+\-]?\d+)?"
+"" Numbers and floats - only match if it is its own word
+"" Do not escape \< and \> in \v 'very magic' mode... See :help /ordinary-atom
+syntax match stanNumber "\v(<|-)\d+>"
+syntax match stanFloat "\v(<|-)\d+(\.\d*)?([eE][+\-]?\d+)?>"
 
 "" Booleans
 syntax keyword stanBoolean true false
