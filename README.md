@@ -4,7 +4,7 @@ A Vim plugin for the [Stan probabilistic programming
 language](https://mc-stan.org/).
 
 <p align="center">
-  <img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot.png" alt="Screenshot of stan-vim syntax highlighting">
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png" alt="Screenshot of stan-vim syntax highlighting"></a>
 </p>
 
 ## Table of Contents
@@ -15,6 +15,7 @@ language](https://mc-stan.org/).
   - [Pathogen](#pathogen)
   - [Manual Installation](#manual-installation)
 - [Documentation](#documentation)
+- [Additional Screenshots](#additional-screenshots)
 - [License](#license)
 
 ## Features
@@ -69,6 +70,13 @@ From Vim:
 
 Alternatively, [read the documentation page on
 GitHub](https://github.com/eigenfoo/stan-vim/blob/master/doc/stan.txt).
+
+## Additional Screenshots
+
+<figure class="half" align="center">
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+</figure>
 
 ## License
 
