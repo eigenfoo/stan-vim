@@ -73,7 +73,7 @@ GitHub](https://github.com/eigenfoo/stan-vim/blob/master/doc/stan.txt).
 
 ## Additional Screenshots
 
-<figure class="half">
+<figure class="half" align="center">
   <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png" alt="Screenshot of stan-vim syntax highlighting"></a>
   <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png" alt="Screenshot of stan-vim syntax highlighting"></a>
 </figure>
