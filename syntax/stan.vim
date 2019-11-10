@@ -12,22 +12,28 @@ syntax case match
 
 " Blocks
 syntax keyword stanBlock functions data parameters model
-syntax match stanBlock "generated quantities"
-syntax match stanBlock "transformed parameters"
-syntax match stanBlock "transformed data"
+syntax match stanBlock "\vgenerated quantities"
+syntax match stanBlock "\vtransformed parameters"
+syntax match stanBlock "\vtransformed data"
 
 syntax keyword stanType int real vector simplex unit_vector ordered positive_ordered
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
-" FIXME is stanFunction the right group for these?
 
 " Distributions
-syntax keyword stanFunction bernoulli bernoulli_logit
+syntax keyword stanFunction bernoulli
 syntax keyword stanFunction bernoulli_lpmf bernoulli_cdf bernoulli_lcdf bernoulli_lccdf bernoulli_rng
+
+syntax keyword stanFunction bernoulli_logit
 syntax keyword stanFunction bernoulli_logit_lpmf bernoulli_logit_rng
 
-syntax keyword stanFunction binomial binomial_logit
+syntax keyword stanFunction bernoulli_logit_glm
+syntax keyword stanFunction bernoulli_logit_glm_lpmf
+
+syntax keyword stanFunction binomial
 syntax keyword stanFunction binomial_lpmf binomial_cdf binomial_lcdf binomial_lccdf binomial_rng
+
+syntax keyword stanFunction binomial_logit
 syntax keyword stanFunction binomial_logit_lpmf
 
 syntax keyword stanFunction beta_binomial
@@ -54,11 +60,17 @@ syntax keyword stanFunction neg_binomial_2_lpmf neg_binomial_2_cdf neg_binomial_
 syntax keyword stanFunction neg_binomial_2_log
 syntax keyword stanFunction neg_binomial_2_log_lpmf neg_binomial_2_log_rng
 
+syntax keyword stanFunction neg_binomial_2_log_glm
+syntax keyword stanFunction neg_binomial_2_log_glm_lpmf
+
 syntax keyword stanFunction poisson
 syntax keyword stanFunction poisson_lpmf poisson_cdf poisson_lcdf poisson_lccdf poisson_rng
 
 syntax keyword stanFunction poisson_log
 syntax keyword stanFunction poisson_log_lpmf poisson_log_rng
+
+syntax keyword stanFunction poisson_log_glm
+syntax keyword stanFunction poisson_log_glm_lpmf
 
 syntax keyword stanFunction multinomial
 syntax keyword stanFunction multinomial_lpmf multinomial_rng
@@ -180,13 +192,16 @@ syntax keyword stanFunction wishart_lpdf wishart_rng
 syntax keyword stanFunction inv_wishart
 syntax keyword stanFunction inv_wishart_lpdf inv_wishart_rng
 
+" Constants
+syntax keyword stanConstant pi e sqrt2 log2 log10
+syntax keyword stanConstant not_a_number positive_infinity negative_infinity machine_precision
+
 " Built in functions
 syntax keyword stanFunction print
 syntax keyword stanFunction abs int_step min max
-syntax keyword stanConstant pi e sqrt2 log2 log10 positive_infinity negative_infinity
 syntax keyword stanFunction step is_inf is_nan fabs fdim fmin fmax fmod floor ceil round trunc
-syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv_sqrt inv_square
-syntax keyword stanFunction cos sin tan acos asin atan atan2
+syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv inv_sqrt inv_square
+syntax keyword stanFunction hypot cos sin tan acos asin atan atan2
 syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
 syntax keyword stanFunction erf erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
@@ -197,6 +212,7 @@ syntax keyword stanFunction expm1 fma lmultiply log1p log1m log1p_exp log1m_exp 
 syntax keyword stanFunction min max sum prod log_sum_exp mean variance sd distance squared_distance
 syntax keyword stanFunction dims num_elements size
 syntax keyword stanFunction rep_array
+syntax keyword stanFunction append_array
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction num_elements rows cols
 syntax keyword stanFunction dot_product columns_dot_product rows_dot_product dot_self columns_dot_self rows_dot_self
@@ -205,13 +221,14 @@ syntax keyword stanFunction multiply_lower_tri_self_transpose diag_pre_multiply 
 syntax keyword stanFunction rep_vector rep_row_vector rep_matrix
 syntax keyword stanFunction diagonal diag_matrix
 syntax keyword stanFunction col row block sub_col sub_row head tail segment
+syntax keyword stanFunction append_col append_row
 syntax keyword stanFunction softmax log_softmax cumulative_sum
 syntax keyword stanFunction cov_exp_quad
 syntax keyword stanFunction mdivide_left_tri_low mdivide_right_tri_low mdivide_left_spd mdivide_right_spd
 syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply trace determinant log_determinant
 syntax keyword stanFunction inverse inverse_spd eigenvalues_sym eigenvectors_sym qr_thin_Q qr_thin_R qr_Q qr_R cholesky_decompose singular_values
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
-syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix
+syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
 syntax keyword stanFunction algebra_solver
 syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf
@@ -232,12 +249,10 @@ syntax match stanOperator "\v\~"
 syntax match stanOperator "\v\?"
 syntax match stanOperator "\v\:"
 syntax match stanOperator "\v\'"
-syntax match stanOperator "\v\/ "  " FIXME Match only a single forward slash
+syntax match stanOperator "\v\/"
 syntax match stanOperator "\v\.[*/]"
 syntax match stanOperator "\v\<\-"
 syntax match stanOperator "\v\\"
-
-syntax match stanInclude "^\s*\#include"
 
 " Removed some, since they're highlighted in other places
 syntax keyword stanCppConflict var fvar STAN_MAJOR STAN_MINOR STAN_PATCH STAN_MATH_MAJOR STAN_MATH_MINOR STAN_MATH_PATCH
@@ -268,6 +283,8 @@ syntax match stanComment contains=@stanCommentGroup,@Spell "//.*"
 syntax match stanComment contains=@stanCommentGroup,@Spell "\#.*"
 syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spell
 
+syntax match stanInclude "\v^\s*\#include"
+
 " Numbers and values
 "" Integers
 syntax match stanNumber "\v-?\d+"
@@ -278,6 +295,7 @@ syntax match stanFloat "\v-?\d+(\.\d*)?([eE][+\-]?\d+)?"
 "" Booleans
 syntax keyword stanBoolean true false
 
+" Exceptions
 syntax keyword stanException reject
 
 " Link
@@ -292,7 +310,6 @@ highlight link stanConditional Conditional
 highlight link stanRepeat Repeat
 highlight link stanOperator Operator
 highlight link stanBlock Keyword
-highlight link stanKeyword Keyword
 highlight link stanCppConflict Error
 highlight link stanException Exception
 highlight link stanInclude Include
