@@ -27,24 +27,27 @@
 CONTENTS                                                        *stan-contents*
 
   1. Introduction.....................................|stan-intro|
-  2. Install..........................................|stan-install|
-  3. License..........................................|stan-license|
-  4. Contributing.....................................|stan-contrib|
-  5. Credits..........................................|stan-credits|
+  2. Installation.....................................|stan-install|
+  3. About............................................|stan-about|
+  4. License..........................................|stan-license|
+  5. Contributing.....................................|stan-contrib|
+  6. Credits..........................................|stan-credits|
 
 ===============================================================================
 INTRODUCTION                                                       *stan-intro*
 
-Homepage: https://github.com/eigenfoo/stan-vim
-
 Vim plugin for the Stan (http://mc-stan.org) probabilistic programming language.
 
-  * Syntax highlighting
-  * Automatic indentation
-  * Code folding
+Homepage: https://github.com/eigenfoo/stan-vim
+
+Features include:
+
+  * Syntax highlighting of Stan types, keywords and built-in functions.
+  * Automatic indentation consistent the recommended Stan code style.
+  * Folding via code indentation.
 
 ===============================================================================
-INSTALL                                                          *stan-install*
+INSTALLATION                                                     *stan-install*
 
   * For Vundle users, place this in your `.vimrc`:
 
@@ -66,6 +69,35 @@ INSTALL                                                          *stan-install*
   * For manual installation, copy all files into your `~/.vim` directory.
 
 ===============================================================================
+ABOUT                                                              *stan-about*
+
+  * stan-vim supports syntax highlighting of Stan types, keywords and built-in
+    functions, including sampling statements and random number generators. All
+    syntax is manually defined in `syntax/stan.vim`.
+
+    - Refer to `syntax/stan.vim` for details.
+
+  * stan-vim supports automatic indentation consistent the recommended Stan code
+    style: that is, 2 spaces and no tabs.
+
+    - This is achieved by `setlocal expandtab`, and locally setting `tabstop`
+      and `shiftwidth` variables to 2.
+
+    - Furthermore, Vim will reindent when "closing characters" (such as `then`,
+      `else, and `}`) are entered. This is achieved by locally setting
+      `indentkeys`.
+
+    - Refer to `indent/stan.vim` for details.
+
+  * stan-vim supports folding via code indentation: that is, Vim will use code
+    indentation to determine which lines to fold. Thus, folding is dependent on
+    the recommended (or at least, consistent) indentation of Stan programs.
+
+    - This is achieved by `setlocal foldmethod=indent`.
+
+    - Refer to `ftplugin/stan/folding.vim` for details.
+
+===============================================================================
 LICENSE                                                          *stan-license*
 
 stan-vim is distributed under the MIT license. See the license file on GitHub:
@@ -75,11 +107,31 @@ stan-vim is distributed under the MIT license. See the license file on GitHub:
 ===============================================================================
 CONTRIBUTING                                                     *stan-contrib*
 
+stan-vim is developed and maintained in a public repository on GitHub.
+
+      https://github.com/eigenfoo/stan-vim
+
+If you have a bug report, feature request or other question, please file an
+issue on GitHub:
+
+      https://github.com/eigenfoo/stan-vim/issues
+
+If you would like to send a patch or other code contribution to stan-vim, please
+submit a pull request through GitHub:
+
+      https://github.com/eigenfoo/stan-vim/pulls
 
 ===============================================================================
 CREDITS                                                          *stan-credits*
 
-  * Other Vim plugins for inspiration (stan.vim, mc-stan.vim, elm.vim)
   * stan-vim contributors:
 
         https://github.com/eigenfoo/stan-vim/graphs/contributors
+
+  * Steve Losh for his book, Learn Vimscript the Hard Way
+
+        http://learnvimscriptthehardway.stevelosh.com/
+
+  * Other Vim plugins for inspiration (specifically, stan.vim, mc-stan.vim and
+    elm.vim)
+

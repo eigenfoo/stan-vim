@@ -3,8 +3,9 @@
 A Vim plugin for the [Stan probabilistic programming
 language](https://mc-stan.org/).
 
-![Screenshot of stan-vim syntax
-highlighting](https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot.png)
+<p align="center">
+  <img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot.png" alt="Screenshot of stan-vim syntax highlighting">
+</p>
 
 ## Table of Contents
 
@@ -18,9 +19,9 @@ highlighting](https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screen
 
 ## Features
 
-1. Syntax highlighting
-1. Automatic indentation
-1. Code folding
+1. Syntax highlighting of Stan types, keywords and built-in functions.
+1. Automatic indentation consistent the recommended Stan code style.
+1. Folding via code indentation.
 
 ## Installation
 
