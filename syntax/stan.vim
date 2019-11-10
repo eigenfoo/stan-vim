@@ -288,7 +288,7 @@ syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spel
 
 syntax match stanInclude "\v^\s*\#include"
 
-" Numbers and values
+" Literals
 "" Integers
 syntax match stanNumber "\v-?\d+"
 
@@ -298,12 +298,16 @@ syntax match stanFloat "\v-?\d+(\.\d*)?([eE][+\-]?\d+)?"
 "" Booleans
 syntax keyword stanBoolean true false
 
+"" Strings - any ASCII character except \ and "
+syntax region stanString start="\v\"" end="\v\""
+
 " Exceptions
 syntax keyword stanException reject
 
 " Link
 highlight link stanComment Comment
 highlight link stanConstant Constant
+highlight link stanString String
 highlight link stanNumber Number
 highlight link stanFloat Float
 highlight link stanBoolean Boolean
