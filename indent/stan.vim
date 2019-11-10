@@ -24,4 +24,8 @@ setlocal shiftwidth=2
 "" Reindent when the following keys are pressed
 setlocal indentkeys+=0=if,0=then,0=else,0\|,0},0\],0),=-},0=in
 
+"" Automatically insert the current comment leader after hitting <Enter> in
+"" insert mode, or 'o'/'O' in Normal mode.
+setlocal formatoptions+=ro
+
 let b:did_indent = 1
