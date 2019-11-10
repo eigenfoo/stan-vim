@@ -10,6 +10,7 @@ if exists("b:current_syntax")
   finish
 endif
 
+" Case sensitivity
 syntax case match
 
 " Blocks
@@ -291,7 +292,7 @@ syntax match stanInclude "\v^\s*\#include"
 "" Integers
 syntax match stanNumber "\v-?\d+"
 
-"" Floating point
+"" Floats
 syntax match stanFloat "\v-?\d+(\.\d*)?([eE][+\-]?\d+)?"
 
 "" Booleans
