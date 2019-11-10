@@ -289,7 +289,6 @@ syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spel
 syntax match stanInclude "\v^\s*\#include"
 
 " Literals
-
 "" Integers
 syntax match stanNumber "\v-?\d+"
 
