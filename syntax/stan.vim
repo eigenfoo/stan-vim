@@ -151,7 +151,7 @@ syntax keyword stanFunction beta
 syntax keyword stanFunction beta_lpdf beta_cdf beta_lcdf beta_lccdf beta_rng
 
 syntax keyword stanFunction beta_proportion
-syntax keyword stanFunction beta_proportion_lpdf beta_proportion_cdf beta_proportion_lcdf beta_proportion_lccdf beta_proportion_rng
+syntax keyword stanFunction beta_proportion_lpdf beta_proportion_lcdf beta_proportion_lccdf beta_proportion_rng
 
 syntax keyword stanFunction von_mises
 syntax keyword stanFunction von_mises_lpdf von_mises_rng

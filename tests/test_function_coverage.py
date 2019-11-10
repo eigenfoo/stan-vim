@@ -1,8 +1,22 @@
 import re
+from itertools import chain
 import requests
 
-FUNCTION_SIGNATURES_FILE = "https://raw.githubusercontent.com/stan-dev/stan/develop/src/stan/lang/function_signatures.h"
+
+# Path to stan-vim syntax file
 SYNTAX_FILE = "syntax/stan.vim"
+
+# Syntax declarations
+SYNTAX_HIGHLIGHTS = [
+    "syntax keyword stanFunction",
+    "syntax keyword stanConstant",
+    "syntax keyword stanSpecial",
+]
+
+# URL for Stan function signatures file
+FUNCTION_SIGNATURES_FILE = "https://raw.githubusercontent.com/stan-dev/stan/develop/src/stan/lang/function_signatures.h"
+
+# Functions that Stan uses to register function signatures
 STAN_ADD_FUNCTIONS = [
     "add",
     "add_unary",
@@ -20,29 +34,31 @@ else:
     msg = "Could not request Stan file."
     raise RuntimeError(msg)
 
-# Read syntax file
+# Read stan-vim syntax file
 with open(SYNTAX_FILE, "r") as f:
     syntax_file = f.read()
 
-# Find all functions from Stan file
+# Find functions declarations from Stan file
 add_functions = "|".join(STAN_ADD_FUNCTIONS)
 regex = r"(?<=[{}]\(['\"])(\w+)(?=['\"])".format(add_functions)
-stan_functions = set(re.findall(regex, stan_file))
-# Remove _log functions
+matches = set(re.findall(regex, stan_file))
 stan_functions = {
-    function for function in stan_functions if not function.endswith("_log")
+    # Remove matches that end with "_log"
+    match
+    for match in matches
+    if not match.endswith("_log")
 }
-# Add bare distribution names
 stan_functions = stan_functions | {
-    function[:-4] for function in stan_functions if function.endswith("_rng")
+    # Add bare distribution names
+    function[:-4]
+    for function in stan_functions
+    if function.endswith("_rng")
 }
 
-regex1 = r"(?<=syntax keyword stanFunction )(.*)"
-regex2 = r"(?<=syntax keyword stanConstant )(.*)"
-matches = re.findall(regex1, syntax_file) + re.findall(regex2, syntax_file)
-
-# Flatten
-highlighted_functions = set([word for match in matches for word in match.split()])
+# Find highlighted words from stan-vim syntax file
+regexes = [r"(?<={} )(.*)".format(declaration) for declaration in SYNTAX_HIGHLIGHTS]
+matches = list(chain(*[re.findall(regex, syntax_file) for regex in regexes]))
+highlighted_functions = set(chain(*[match.split() for match in matches]))
 
 missing = stan_functions - highlighted_functions
 unnecessary = highlighted_functions - stan_functions
