@@ -75,6 +75,11 @@ ABOUT                                                              *stan-about*
     functions, including sampling statements and random number generators. All
     syntax is manually defined in `syntax/stan.vim`.
 
+    - Note that while strings are supported by Stan (mainly for `print` and
+      `reject` statements), Stan does not allow the backslash or doublequote
+      characters in strings. However, stan-vim will still highlight strings with
+      a backslash character in them.
+
     - Refer to `syntax/stan.vim` for details.
 
   * stan-vim supports automatic indentation consistent the recommended Stan code
