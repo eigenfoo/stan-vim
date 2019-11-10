@@ -273,7 +273,8 @@ syntax keyword stanCppConflict try typedef typeid typename union unsigned using
 syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
 
 syntax keyword stanOperator return
-syntax keyword stanSpecial target lower upper offset multiplier
+syntax keyword stanSpecial lower upper offset multiplier
+syntax keyword stanKeyword target
 
 " To do
 syntax keyword stanTodo TODO FIXME
@@ -316,6 +317,7 @@ highlight link stanConditional Conditional
 highlight link stanRepeat Repeat
 highlight link stanOperator Operator
 highlight link stanBlock Keyword
+highlight link stanKeyword Keyword
 highlight link stanCppConflict Error
 highlight link stanException Exception
 highlight link stanInclude Include
