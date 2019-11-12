@@ -23,6 +23,8 @@ language](https://mc-stan.org/).
 1. Syntax highlighting of Stan types, keywords and built-in functions.
 1. Automatic indentation consistent the recommended Stan code style.
 1. Folding via code indentation.
+1. Autocompletion of Stan keywords and functions via the Vim built-in
+   `omnifunc`.
 
 ## Installation
 
