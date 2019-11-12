@@ -45,6 +45,8 @@ Features include:
   * Syntax highlighting of Stan types, keywords and built-in functions.
   * Automatic indentation consistent the recommended Stan code style.
   * Folding via code indentation.
+  * Autocompletion of Stan keywords and functions via the Vim built-in
+    `omnifunc`.
 
 ===============================================================================
 INSTALLATION                                                     *stan-install*
@@ -101,6 +103,20 @@ ABOUT                                                              *stan-about*
     - This is achieved by `setlocal foldmethod=indent`.
 
     - Refer to `ftplugin/stan/folding.vim` for details.
+
+  * stan-vim supports autocompletion of Stan keywords and functions via Vim's
+    built-in `omnifunc`.
+
+    - Press Ctrl-X Ctrl-O in Insert mode to activate it.
+
+    - If you use a separate autocompletion plugin (always recommended!) such as
+      YouCompleteMe, the plugin will likely make use of this `omnifunc` to offer
+      completions.
+
+    - The autocompletion is achieved by `setlocal
+      omnifunc=syntaxcomplete#Complete`
+
+    - Refer to `ftplugin/stan/autocomplete.vim` for details.
 
 ===============================================================================
 LICENSE                                                          *stan-license*
