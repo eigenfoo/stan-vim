@@ -28,7 +28,7 @@ CONTENTS                                                        *stan-contents*
 
   1. Introduction.....................................|stan-intro|
   2. Installation.....................................|stan-install|
-  3. About............................................|stan-about|
+  3. Features.........................................|stan-features|
   4. License..........................................|stan-license|
   5. Contributing.....................................|stan-contrib|
   6. Credits..........................................|stan-credits|
@@ -71,7 +71,7 @@ INSTALLATION                                                     *stan-install*
   * For manual installation, copy all files into your `~/.vim` directory.
 
 ===============================================================================
-ABOUT                                                              *stan-about*
+FEATURES                                                        *stan-features*
 
   * stan-vim supports syntax highlighting of Stan types, keywords and built-in
     functions, including sampling statements and random number generators. All
@@ -131,6 +131,10 @@ CONTRIBUTING                                                     *stan-contrib*
 stan-vim is developed and maintained in a public repository on GitHub.
 
       https://github.com/eigenfoo/stan-vim
+
+In addition to GitHub, stan-vim is released and distributed on Vim Online.
+
+      https://www.vim.org/scripts/script.php?script_id=5835
 
 If you have a bug report, feature request or other question, please file an
 issue on GitHub:
