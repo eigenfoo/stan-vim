@@ -83,6 +83,10 @@ GitHub](https://github.com/eigenfoo/stan-vim/blob/master/doc/stan.txt).
   <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png" alt="Screenshot of stan-vim syntax highlighting"></a>
 </p>
 
+<p align="center">
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot3.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot3.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+</p>
+
 ## License
 
 `stan-vim` is distributed under the MIT license. [See the license file on
