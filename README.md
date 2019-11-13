@@ -15,6 +15,7 @@ language](https://mc-stan.org/).
   - [Pathogen](#pathogen)
   - [Manual Installation](#manual-installation)
 - [Documentation](#documentation)
+- [Configuration](#configuration)
 - [Additional Screenshots](#additional-screenshots)
 - [License](#license)
 
@@ -25,6 +26,7 @@ language](https://mc-stan.org/).
 1. Folding via code indentation.
 1. Autocompletion of Stan keywords and functions via the Vim built-in
    `omnifunc`.
+1. Keybinding to compile the current Stan file.
 
 ## Installation
 
@@ -67,11 +69,17 @@ Copy all files into your `~/.vim` directory.
 From Vim:
 
 ```
-:help stan
+:help stan-features
 ```
 
 Alternatively, [read the documentation page on
 GitHub](https://github.com/eigenfoo/stan-vim/blob/master/doc/stan.txt).
+
+## Configuration
+
+The only variable that may be configured is `g:cmdstan_path` (by default, it is
+`~/cmdstan/`). Once this is correctly configured, the keybinding
+`<localleader>c` will compile the current Stan file.
 
 ## Additional Screenshots
 

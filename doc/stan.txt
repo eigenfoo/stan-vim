@@ -28,7 +28,7 @@ CONTENTS                                                        *stan-contents*
 
   1. Introduction.....................................|stan-intro|
   2. Installation.....................................|stan-install|
-  3. About............................................|stan-about|
+  3. Features.........................................|stan-features|
   4. License..........................................|stan-license|
   5. Contributing.....................................|stan-contrib|
   6. Credits..........................................|stan-credits|
@@ -71,7 +71,7 @@ INSTALLATION                                                     *stan-install*
   * For manual installation, copy all files into your `~/.vim` directory.
 
 ===============================================================================
-ABOUT                                                              *stan-about*
+FEATURES                                                        *stan-features*
 
   * stan-vim supports syntax highlighting of Stan types, keywords and built-in
     functions, including sampling statements and random number generators. All
@@ -117,6 +117,19 @@ ABOUT                                                              *stan-about*
       omnifunc=syntaxcomplete#Complete`
 
     - Refer to `ftplugin/stan/autocomplete.vim` for details.
+
+  * stan-vim can issue an external command to a local copy of CmdStan to compile
+    the current file.
+
+    - To do this, configure
+
+      `let g:cmdstan_path = "~/cmdstan/"`
+
+      either in your `.vimrc` or upon opening a Stan file (if running from Vim,
+      remember to enter command mode by hitting `:`). By default, the
+      `g:cmdstan_path` variable is set to `"~/cmdstan/"`.
+
+    - Then the keybinding `<localleader>c` will compile the current Stan file.
 
 ===============================================================================
 LICENSE                                                          *stan-license*
