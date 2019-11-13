@@ -4,7 +4,7 @@ A Vim plugin for the [Stan probabilistic programming
 language](https://mc-stan.org/).
 
 <p align="center">
-  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png" alt="Screenshot of stan-vim syntax highlighting" width="600"></a>
 </p>
 
 ## Table of Contents
@@ -76,15 +76,15 @@ GitHub](https://github.com/eigenfoo/stan-vim/blob/master/doc/stan.txt).
 ## Additional Screenshots
 
 <p align="center">
-  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot1.png" alt="Screenshot of stan-vim syntax highlighting" width="600"></a>
 </p>
 
 <p align="center">
-  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot2.png" alt="Screenshot of stan-vim syntax highlighting" width="600"></a>
 </p>
 
 <p align="center">
-  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot3.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot3.png" alt="Screenshot of stan-vim syntax highlighting"></a>
+  <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot3.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot3.png" alt="Screenshot of stan-vim syntax highlighting" width="600"></a>
 </p>
 
 ## License
