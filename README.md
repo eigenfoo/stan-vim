@@ -1,7 +1,8 @@
 # stan-vim
 
-A Vim plugin for the [Stan probabilistic programming
-language](https://mc-stan.org/).
+[![Coverage Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Feigenfoo%2Fstan-vim%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/eigenfoo/stan-vim/goto?ref=master) 
+
+A Vim plugin for the [Stan probabilistic programming language](https://mc-stan.org/).
 
 <p align="center">
   <a href="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png"><img src="https://raw.github.com/eigenfoo/stan-vim/master/screenshots/screenshot0.png" alt="Screenshot of stan-vim syntax highlighting" width="600"></a>
@@ -23,8 +24,7 @@ language](https://mc-stan.org/).
 1. Syntax highlighting of Stan types, keywords and built-in functions.
 1. Automatic indentation consistent the recommended Stan code style.
 1. Folding via code indentation.
-1. Autocompletion of Stan keywords and functions via the Vim built-in
-   `omnifunc`.
+1. Autocompletion of Stan keywords and functions via the Vim built-in `omnifunc`.
 
 ## Installation
 
