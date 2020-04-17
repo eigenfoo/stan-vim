@@ -8,52 +8,61 @@ SYNTAX_FILE = "syntax/stan.vim"
 
 # Syntax declarations
 SYNTAX_HIGHLIGHTS = [
-    "syntax keyword stanFunction",
     "syntax keyword stanConstant",
+    "syntax keyword stanException",
+    "syntax keyword stanFunction",
+    "syntax keyword stanKeyword",
     "syntax keyword stanSpecial",
 ]
 
-# URL for Stan function signatures file
-FUNCTION_SIGNATURES_FILE = "https://raw.githubusercontent.com/stan-dev/stan/develop/src/stan/lang/function_signatures.h"
-
-# Functions that Stan uses to register function signatures
-STAN_ADD_FUNCTIONS = [
-    "add",
-    "add_unary",
-    "add_unary_vectorized",
-    "add_binary",
-    "add_ternary",
-    "add_nullary",
+# URL for Stan documentation
+DOCUMENTATION_URLS = [
+    "https://raw.githubusercontent.com/stan-dev/docs/master/src/functions-reference/"
+    + filename
+    for filename in [
+        "array_operations.Rmd",
+        "binary_distributions.Rmd",
+        "bounded_continuous_distributions.Rmd",
+        "bounded_discrete_distributions.Rmd",
+        "circular_distributions.Rmd",
+        "continuous_distributions_on_[0_1].Rmd",
+        "correlation_matrix_distributions.Rmd",
+        "covariance_matrix_distributions.Rmd",
+        "distributions_over_unbounded_vectors.Rmd",
+        "higher-order_functions.Rmd",
+        "integer-valued_basic_functions.Rmd",
+        "matrix_operations.Rmd",
+        "mixed_operations.Rmd",
+        "multivariate_discrete_distributions.Rmd",
+        "positive_continuous_distributions.Rmd",
+        "positive_lower-bounded_distributions.Rmd",
+        "real-valued_basic_functions.Rmd",
+        "simplex_distributions.Rmd",
+        "sparse_matrix_operations.Rmd",
+        "unbounded_continuous_distributions.Rmd",
+        "unbounded_discrete_distributions.Rmd",
+        "void_functions.Rmd",
+    ]
 ]
 
-# Request Stan file
-req = requests.get(FUNCTION_SIGNATURES_FILE)
-if req.status_code == requests.codes.ok:
-    stan_file = req.text
-else:
-    msg = "Could not request Stan file."
-    raise RuntimeError(msg)
+# Request Stan files
+stan_docs = []
+for url in DOCUMENTATION_URLS:
+    req = requests.get(url)
+    if req.status_code == requests.codes.ok:
+        stan_docs.append(req.text)
+    else:
+        msg = "Could not request Stan file."
+        raise RuntimeError(msg)
+stan_docs = "\n".join(stan_docs)
 
 # Read stan-vim syntax file
 with open(SYNTAX_FILE, "r") as f:
     syntax_file = f.read()
 
 # Find functions declarations from Stan file
-add_functions = "|".join(STAN_ADD_FUNCTIONS)
-regex = r"(?<=[{}]\(['\"])(\w+)(?=['\"])".format(add_functions)
-matches = set(re.findall(regex, stan_file))
-stan_functions = {
-    # Remove matches that end with "_log"
-    match
-    for match in matches
-    if not match.endswith("_log")
-}
-stan_functions = stan_functions | {
-    # Add bare distribution names
-    function[:-4]
-    for function in stan_functions
-    if function.endswith("_rng")
-}
+regex = r"\*\*\`([a-zA-Z0-9_]+)\`\*\*"
+stan_functions = set(re.findall(regex, stan_docs))
 
 # Find highlighted words from stan-vim syntax file
 regexes = [r"(?<={} )(.*)".format(declaration) for declaration in SYNTAX_HIGHLIGHTS]
@@ -68,3 +77,7 @@ print(missing)
 print()
 print("Unnecessary:")
 print(unnecessary)
+
+# Only fail test if some documented functions are not highlighted.
+if missing:
+    exit(1)

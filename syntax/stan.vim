@@ -45,11 +45,11 @@ syntax keyword stanFunction beta_binomial_lpmf beta_binomial_cdf beta_binomial_l
 syntax keyword stanFunction hypergeometric
 syntax keyword stanFunction hypergeometric_lpmf hypergeometric_rng
 
-syntax keyword stanFunction categorical categorical_logit
-syntax keyword stanFunction categorical_lpmf categorical_logit_lpmf categorical_rng categorical_logit_rng
+syntax keyword stanFunction categorical categorical_logit categorical_logit_glm
+syntax keyword stanFunction categorical_lpmf categorical_logit_lpmf categorical_rng categorical_logit_rng categorical_logit_glm_lpmf
 
-syntax keyword stanFunction ordered_logistic
-syntax keyword stanFunction ordered_logistic_lpmf ordered_logistic_rng
+syntax keyword stanFunction ordered_logistic ordered_logistic_glm
+syntax keyword stanFunction ordered_logistic_lpmf ordered_logistic_rng ordered_logistic_glm_lpmf
 
 syntax keyword stanFunction ordered_probit
 syntax keyword stanFunction ordered_probit_lpmf ordered_probit_rng
@@ -82,7 +82,7 @@ syntax keyword stanFunction normal
 syntax keyword stanFunction normal_lpdf normal_cdf normal_lcdf normal_lccdf normal_rng
 
 syntax keyword stanFunction std_normal
-syntax keyword stanFunction std_normal_lpdf
+syntax keyword stanFunction std_normal_lpdf std_normal_cdf std_normal_lcdf std_normal_lccdf std_normal_rng
 
 syntax keyword stanFunction normal_id_glm
 syntax keyword stanFunction normal_id_glm_lpdf
@@ -211,18 +211,19 @@ syntax keyword stanFunction erf erfc Phi inv_Phi Phi_approx binary_log_loss owen
 syntax keyword stanFunction inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
 syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind modified_bessel_second_kind
 syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
-syntax keyword stanFunction expm1 fma lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
+syntax keyword stanFunction expm1 fma multiply_log lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
 syntax keyword stanFunction min max sum prod log_sum_exp mean variance sd distance squared_distance
 syntax keyword stanFunction dims num_elements size
 syntax keyword stanFunction rep_array
 syntax keyword stanFunction append_array
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
+syntax keyword stanFunction reverse
 syntax keyword stanFunction num_elements rows cols
 syntax keyword stanFunction dot_product columns_dot_product rows_dot_product dot_self columns_dot_self rows_dot_self
 syntax keyword stanFunction tcrossprod crossprod quad_form quad_form_diag quad_form_sym trace_quad_form trace_gen_quad_form
 syntax keyword stanFunction multiply_lower_tri_self_transpose diag_pre_multiply diag_post_multiply
 syntax keyword stanFunction rep_vector rep_row_vector rep_matrix
-syntax keyword stanFunction diagonal diag_matrix
+syntax keyword stanFunction add_diag diagonal diag_matrix
 syntax keyword stanFunction col row block sub_col sub_row head tail segment
 syntax keyword stanFunction append_col append_row
 syntax keyword stanFunction softmax log_softmax cumulative_sum
@@ -234,8 +235,9 @@ syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_des
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
 syntax keyword stanFunction algebra_solver
-syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf
-syntax keyword stanFunction integrate_1d integrate\_1d
+syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
+syntax keyword stanFunction integrate_1d
+syntax keyword stanFunction reduce_sum reduce_sum_static
 syntax keyword stanFunction map_rect
 
 " Control flow
@@ -271,10 +273,9 @@ syntax keyword stanCppConflict short signed sizeof static static_assert static_c
 syntax keyword stanCppConflict struct switch template this thread_local throw true
 syntax keyword stanCppConflict try typedef typeid typename union unsigned using
 syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
-
 syntax keyword stanOperator return
 syntax keyword stanSpecial lower upper offset multiplier
-syntax keyword stanKeyword target
+syntax keyword stanKeyword target get_lp
 
 " To do
 syntax keyword stanTodo TODO FIXME
