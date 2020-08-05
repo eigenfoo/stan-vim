@@ -1,3 +1,5 @@
+""" Check that we have syntax highlighting for all documented functions. """
+
 import re
 from itertools import chain
 import requests

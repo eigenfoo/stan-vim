@@ -78,6 +78,9 @@ syntax keyword stanFunction poisson_log_glm_lpmf
 syntax keyword stanFunction multinomial
 syntax keyword stanFunction multinomial_lpmf multinomial_rng
 
+syntax keyword stanFunction multinomial_logit
+syntax keyword stanFunction multinomial_logit_lpmf multinomial_logit_rng
+
 syntax keyword stanFunction normal
 syntax keyword stanFunction normal_lpdf normal_cdf normal_lcdf normal_lccdf normal_rng
 
@@ -229,12 +232,14 @@ syntax keyword stanFunction append_col append_row
 syntax keyword stanFunction softmax log_softmax cumulative_sum
 syntax keyword stanFunction cov_exp_quad
 syntax keyword stanFunction mdivide_left_tri_low mdivide_right_tri_low mdivide_left_spd mdivide_right_spd
-syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply trace determinant log_determinant
+syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply matrix_power trace determinant log_determinant
 syntax keyword stanFunction inverse inverse_spd eigenvalues_sym eigenvectors_sym qr_thin_Q qr_thin_R qr_Q qr_R cholesky_decompose singular_values
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
-syntax keyword stanFunction algebra_solver
+syntax keyword stanFunction algebra_solver algebra_solver_newton
+syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol
+" The following integrade_ode functions are deprecated, but have not been removed.
 syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
 syntax keyword stanFunction integrate_1d
 syntax keyword stanFunction reduce_sum reduce_sum_static
