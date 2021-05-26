@@ -14,6 +14,7 @@ A Vim plugin for the [Stan probabilistic programming language](https://mc-stan.o
 - [Installation](#installation)
   - [Vundle, NeoBundle and VimPlug](#vundle-neobundle-and-vimplug)
   - [Pathogen](#pathogen)
+  - [Home Manager](#home-manager)
   - [Manual Installation](#manual-installation)
 - [Documentation](#documentation)
 - [Additional Screenshots](#additional-screenshots)
@@ -56,6 +57,21 @@ Run the following from the terminal:
 ```bash
 cd ~/.vim/bundle
 git clone https://github.com/eigenfoo/stan-vim
+```
+
+### Home Manager
+
+Nix users who manage their Vim plugins with Home Manager can grab `stan-vim` from nixpkgs:
+
+```nix
+{ pkgs, ... }:
+{
+  # or programs.neovim.plugins
+  programs.vim.plugins = with pkgs.vimPlugins; [
+    stan-vim
+    # ...
+  ];
+}
 ```
 
 ### Manual Installation
