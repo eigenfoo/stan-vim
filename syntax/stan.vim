@@ -233,6 +233,7 @@ syntax keyword stanFunction hypot cos sin tan acos asin atan atan2
 syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
 syntax keyword stanFunction erf erfc inv_erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
+syntax keyword stanFunction std_normal_qf std_normal_log_qf
 syntax keyword stanFunction inc_beta inv_inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
 syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind log_modified_bessel_first_kind modified_bessel_second_kind
 syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
@@ -262,13 +263,15 @@ syntax keyword stanFunction eigenvectors eigenvalues
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d to_complex
-syntax keyword stanFunction algebra_solver algebra_solver_newton
+syntax keyword stanFunction algebra_solver algebra_solver_newton solve_newton solve_newton_tol solve_powell solve_powell_tol
 syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol ode_adjoint_tol_ctl ode_ckrk ode_ckrk_tol
 syntax keyword stanFunction dae dae_tol
 syntax keyword stanFunction reduce_sum reduce_sum_static
 syntax keyword stanFunction map_rect
 syntax keyword stanFunction fft inv_fft fft2 inv_fft2
 syntax keyword stanFunction L1 L2
+syntax keyword stanFunction complex_schur_decompose_t complex_schur_decompose_u
+syntax keyword stanFunction conj
 
 " Deprecations
 syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
