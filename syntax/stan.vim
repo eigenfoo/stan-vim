@@ -23,6 +23,7 @@ syntax keyword stanType int real vector simplex unit_vector ordered positive_ord
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
 syntax keyword stanType array
+syntax keyword stanType complex complex_matrix complex_vector complex_row_vector
 
 " Distributions
 syntax keyword stanFunction bernoulli
@@ -191,6 +192,9 @@ syntax keyword stanFunction multi_gp_cholesky_lpdf multi_gp_cholesky_lupdf
 syntax keyword stanFunction multi_student_t
 syntax keyword stanFunction multi_student_t_lpdf multi_student_t_lupdf multi_student_t_rng
 
+syntax keyword stanFunction multi_student_t_cholesky
+syntax keyword stanFunction multi_student_t_cholesky_lpdf multi_student_t_cholesky_lupdf multi_student_t_cholesky_rng
+
 syntax keyword stanFunction gaussian_dlm_obs
 syntax keyword stanFunction gaussian_dlm_obs_lpdf gaussian_dlm_obs_lupdf
 
@@ -206,8 +210,14 @@ syntax keyword stanFunction lkj_corr_cholesky_lpdf lkj_corr_cholesky_lupdf lkj_c
 syntax keyword stanFunction wishart
 syntax keyword stanFunction wishart_lpdf wishart_lupdf wishart_rng
 
+syntax keyword stanFunction wishart_cholesky
+syntax keyword stanFunction wishart_cholesky_lpdf wishart_cholesky_lupdf wishart_cholesky_rng
+
 syntax keyword stanFunction inv_wishart
 syntax keyword stanFunction inv_wishart_lpdf inv_wishart_lupdf inv_wishart_rng
+
+syntax keyword stanFunction inv_wishart_cholesky
+syntax keyword stanFunction inv_wishart_cholesky_lpdf inv_wishart_cholesky_lupdf inv_wishart_cholesky_rng
 
 " Constants
 syntax keyword stanConstant pi e sqrt2 log2 log10
@@ -216,13 +226,14 @@ syntax keyword stanConstant not_a_number positive_infinity negative_infinity mac
 " Built in functions
 syntax keyword stanFunction print
 syntax keyword stanFunction abs int_step min max
-syntax keyword stanFunction step is_inf is_nan fabs fdim fmin fmax fmod floor ceil round trunc
+syntax keyword stanFunction get_real get_imag
+syntax keyword stanFunction step is_inf is_nan fdim fmin fmax fmod floor ceil round trunc
 syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv inv_sqrt inv_square
 syntax keyword stanFunction hypot cos sin tan acos asin atan atan2
 syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
 syntax keyword stanFunction erf erfc inv_erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
-syntax keyword stanFunction inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
+syntax keyword stanFunction inc_beta inv_inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
 syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind log_modified_bessel_first_kind modified_bessel_second_kind
 syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
 syntax keyword stanFunction expm1 fma multiply_log ldexp lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
@@ -245,19 +256,25 @@ syntax keyword stanFunction append_col append_row
 syntax keyword stanFunction softmax log_softmax cumulative_sum
 syntax keyword stanFunction cov_exp_quad
 syntax keyword stanFunction mdivide_left_tri_low mdivide_right_tri_low mdivide_left_spd mdivide_right_spd
-syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply matrix_power trace determinant log_determinant
+syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply matrix_power trace determinant log_determinant log_determinant_spd
 syntax keyword stanFunction inverse inverse_spd chol2inv generalized_inverse eigenvalues_sym eigenvectors_sym qr_thin_Q qr_thin_R qr_Q qr_R cholesky_decompose singular_values svd_U svd_V
+syntax keyword stanFunction eigenvectors eigenvalues
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
-syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
+syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d to_complex
 syntax keyword stanFunction algebra_solver algebra_solver_newton
 syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol ode_adjoint_tol_ctl ode_ckrk ode_ckrk_tol
 syntax keyword stanFunction dae dae_tol
-" The following integrade_ode functions are deprecated, but have not been removed.
-syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
-syntax keyword stanFunction integrate_1d
 syntax keyword stanFunction reduce_sum reduce_sum_static
 syntax keyword stanFunction map_rect
+syntax keyword stanFunction fft inv_fft fft2 inv_fft2
+syntax keyword stanFunction L1 L2
+
+" Deprecations
+syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
+syntax keyword stanFunction integrate_1d
+syntax keyword stanFunction fabs
+syntax match stanOperator "\v\<\-"
 
 " Control flow
 syntax keyword stanConditional if then else
@@ -275,7 +292,6 @@ syntax match stanOperator "\v\:"
 syntax match stanOperator "\v\'"
 syntax match stanOperator "\v\/"
 syntax match stanOperator "\v\.[*/]"
-syntax match stanOperator "\v\<\-" "deprecated in 2.29
 syntax match stanOperator "\v\\"
 
 " Removed some, since they're highlighted in other places
