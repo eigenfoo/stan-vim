@@ -115,6 +115,9 @@ syntax keyword stanFunction logistic_lpdf logistic_lupdf logistic_cdf logistic_l
 syntax keyword stanFunction gumbel
 syntax keyword stanFunction gumbel_lpdf gumbel_lupdf gumbel_cdf gumbel_lcdf gumbel_lccdf gumbel_rng
 
+syntax keyword stanFunction skew_double_exponential
+syntax keyword stanFunction skew_double_exponential_lpdf skew_double_exponential_lupdf skew_double_exponential_cdf skew_double_exponential_lcdf skew_double_exponential_lccdf skew_double_exponential_rng
+
 syntax keyword stanFunction lognormal
 syntax keyword stanFunction lognormal_lpdf lognormal_lupdf lognormal_cdf lognormal_lcdf lognormal_lccdf lognormal_rng
 
