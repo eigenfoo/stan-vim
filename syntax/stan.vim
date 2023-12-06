@@ -22,6 +22,7 @@ syntax match stanBlock "\vtransformed data"
 syntax keyword stanType int real vector simplex unit_vector ordered positive_ordered
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
+syntax keyword stanType array
 
 " Distributions
 syntax keyword stanFunction bernoulli
@@ -31,7 +32,7 @@ syntax keyword stanFunction bernoulli_logit
 syntax keyword stanFunction bernoulli_logit_lpmf bernoulli_logit_lupmf bernoulli_logit_rng
 
 syntax keyword stanFunction bernoulli_logit_glm
-syntax keyword stanFunction bernoulli_logit_glm_lpmf bernoulli_logit_glm_lupmf
+syntax keyword stanFunction bernoulli_logit_glm_lpmf bernoulli_logit_glm_lupmf bernoulli_logit_glm_rand
 
 syntax keyword stanFunction binomial
 syntax keyword stanFunction binomial_lpmf binomial_lupmf binomial_cdf binomial_lcdf binomial_lccdf binomial_rng
@@ -148,6 +149,9 @@ syntax keyword stanFunction frechet_lpdf frechet_lupdf frechet_cdf frechet_lcdf 
 syntax keyword stanFunction rayleigh
 syntax keyword stanFunction rayleigh_lpdf rayleigh_lupdf rayleigh_cdf rayleigh_lcdf rayleigh_lccdf rayleigh_rng
 
+syntax keyword stanFunction loglogistic
+syntax keyword stanFunction loglogistic_lpdf loglogistic_cdf loglogistic_rng loglogistic_log
+
 syntax keyword stanFunction wiener
 syntax keyword stanFunction wiener_lpdf wiener_lupdf
 
@@ -164,7 +168,7 @@ syntax keyword stanFunction beta_proportion
 syntax keyword stanFunction beta_proportion_lpdf beta_proportion_lupdf beta_proportion_lcdf beta_proportion_lccdf beta_proportion_rng
 
 syntax keyword stanFunction von_mises
-syntax keyword stanFunction von_mises_lpdf von_mises_lupdf von_mises_rng
+syntax keyword stanFunction von_mises_lpdf von_mises_lupdf von_mises_lcdf von_mises_lccdf von_mises_rng
 
 syntax keyword stanFunction uniform
 syntax keyword stanFunction uniform_lpdf uniform_lupdf uniform_cdf uniform_lcdf uniform_lccdf uniform_rng
@@ -217,7 +221,7 @@ syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv inv
 syntax keyword stanFunction hypot cos sin tan acos asin atan atan2
 syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
-syntax keyword stanFunction erf erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
+syntax keyword stanFunction erf erfc inv_erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
 syntax keyword stanFunction inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
 syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind log_modified_bessel_first_kind modified_bessel_second_kind
 syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
@@ -248,6 +252,7 @@ syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_den
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
 syntax keyword stanFunction algebra_solver algebra_solver_newton
 syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol ode_adjoint_tol_ctl ode_ckrk ode_ckrk_tol
+syntax keyword stanFunction dae dae_tol
 " The following integrade_ode functions are deprecated, but have not been removed.
 syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
 syntax keyword stanFunction integrate_1d
@@ -270,23 +275,11 @@ syntax match stanOperator "\v\:"
 syntax match stanOperator "\v\'"
 syntax match stanOperator "\v\/"
 syntax match stanOperator "\v\.[*/]"
-syntax match stanOperator "\v\<\-"
+syntax match stanOperator "\v\<\-" "deprecated in 2.29
 syntax match stanOperator "\v\\"
 
 " Removed some, since they're highlighted in other places
-syntax keyword stanCppConflict var fvar STAN_MAJOR STAN_MINOR STAN_PATCH STAN_MATH_MAJOR STAN_MATH_MINOR STAN_MATH_PATCH
-syntax keyword stanCppConflict alignas alignof and_eq asm auto bitand bitor bool
-syntax keyword stanCppConflict break case catch char char16_t char32_t class compl
-syntax keyword stanCppConflict const constexpr const_cast continue decltype default
-syntax keyword stanCppConflict delete do double dynamic_cast enum explicit
-syntax keyword stanCppConflict export extern float friend goto
-syntax keyword stanCppConflict inline long mutable namespace new noexcept
-syntax keyword stanCppConflict not not_eq nullptr operator or or_eq private
-syntax keyword stanCppConflict protected public register reinterpret_cast
-syntax keyword stanCppConflict short signed sizeof static static_assert static_cast
-syntax keyword stanCppConflict struct switch template this thread_local throw true
-syntax keyword stanCppConflict try typedef typeid typename union unsigned using
-syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
+syntax keyword stanCppConflict var auto break continue export extern static struct true typedef void
 syntax keyword stanOperator return
 syntax keyword stanSpecial lower upper offset multiplier
 syntax keyword stanKeyword target get_lp
