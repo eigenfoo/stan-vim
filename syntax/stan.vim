@@ -244,7 +244,7 @@ syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_des
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
 syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
 syntax keyword stanFunction algebra_solver algebra_solver_newton
-syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol
+syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol ode_adjoint_tol_ctl ode_ckrk ode_ckrk_tol
 " The following integrade_ode functions are deprecated, but have not been removed.
 syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
 syntax keyword stanFunction integrate_1d
