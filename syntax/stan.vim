@@ -22,7 +22,6 @@ syntax match stanBlock "\vtransformed data"
 syntax keyword stanType int real vector simplex unit_vector ordered positive_ordered
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
-syntax keyword stanType array
 syntax keyword stanType complex complex_matrix complex_vector complex_row_vector
 
 " Distributions
@@ -234,10 +233,10 @@ syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
 syntax keyword stanFunction erf erfc inv_erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
 syntax keyword stanFunction std_normal_qf std_normal_log_qf
-syntax keyword stanFunction inc_beta inv_inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
+syntax keyword stanFunction inc_beta inv_inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q choose
 syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind log_modified_bessel_first_kind modified_bessel_second_kind
 syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
-syntax keyword stanFunction expm1 fma multiply_log ldexp lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
+syntax keyword stanFunction expm1 fma ldexp lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
 syntax keyword stanFunction lambert_w0 lambert_wm1
 syntax keyword stanFunction min max sum prod log_sum_exp mean variance sd distance squared_distance
 syntax keyword stanFunction dims num_elements size
@@ -255,10 +254,11 @@ syntax keyword stanFunction linspaced_array linspaced_int_array linspaced_vector
 syntax keyword stanFunction col row block sub_col sub_row head tail segment
 syntax keyword stanFunction append_col append_row
 syntax keyword stanFunction softmax log_softmax cumulative_sum
-syntax keyword stanFunction cov_exp_quad
+syntax keyword stanFunction gp_exp_quad_cov gp_dot_prod_cov gp_matern32_cov gp_matern52_cov gp_periodic_cov
 syntax keyword stanFunction mdivide_left_tri_low mdivide_right_tri_low mdivide_left_spd mdivide_right_spd
 syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply matrix_power trace determinant log_determinant log_determinant_spd
 syntax keyword stanFunction inverse inverse_spd chol2inv generalized_inverse eigenvalues_sym eigenvectors_sym qr_thin_Q qr_thin_R qr_Q qr_R cholesky_decompose singular_values svd_U svd_V
+syntax keyword stanFunction qr qr_thin eigendecompose_sym eigendecompose complex_schur_decompose svd csr_extract
 syntax keyword stanFunction eigenvectors eigenvalues
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
@@ -277,7 +277,6 @@ syntax keyword stanFunction conj
 syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
 syntax keyword stanFunction integrate_1d
 syntax keyword stanFunction fabs
-syntax match stanOperator "\v\<\-"
 
 " Control flow
 syntax keyword stanConditional if then else
@@ -300,8 +299,8 @@ syntax match stanOperator "\v\\"
 " Removed some, since they're highlighted in other places
 syntax keyword stanCppConflict var auto break continue export extern static struct true typedef void
 syntax keyword stanOperator return
-syntax keyword stanSpecial lower upper offset multiplier
-syntax keyword stanKeyword target get_lp
+syntax keyword stanSpecial array lower upper offset multiplier log_prob_impl
+syntax keyword stanKeyword target
 
 " To do
 syntax keyword stanTodo TODO FIXME
@@ -311,7 +310,6 @@ syntax cluster stanCommentGroup contains=stanTodo,stanFuncDoc
 
 " Comments
 syntax match stanComment contains=@stanCommentGroup,@Spell "//.*"
-syntax match stanComment contains=@stanCommentGroup,@Spell "\#.*"
 syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spell
 
 syntax match stanInclude "\v^\s*\#include"
