@@ -22,6 +22,7 @@ syntax match stanBlock "\vtransformed data"
 syntax keyword stanType int real vector simplex unit_vector ordered positive_ordered
 syntax keyword stanType row_vector matrix cholesky_factor_corr cholesky_factor_cov
 syntax keyword stanType corr_matrix cov_matrix
+syntax keyword stanType complex complex_matrix complex_vector complex_row_vector
 
 " Distributions
 syntax keyword stanFunction bernoulli
@@ -31,7 +32,7 @@ syntax keyword stanFunction bernoulli_logit
 syntax keyword stanFunction bernoulli_logit_lpmf bernoulli_logit_lupmf bernoulli_logit_rng
 
 syntax keyword stanFunction bernoulli_logit_glm
-syntax keyword stanFunction bernoulli_logit_glm_lpmf bernoulli_logit_glm_lupmf
+syntax keyword stanFunction bernoulli_logit_glm_lpmf bernoulli_logit_glm_lupmf bernoulli_logit_glm_rand
 
 syntax keyword stanFunction binomial
 syntax keyword stanFunction binomial_lpmf binomial_lupmf binomial_cdf binomial_lcdf binomial_lccdf binomial_rng
@@ -115,6 +116,9 @@ syntax keyword stanFunction logistic_lpdf logistic_lupdf logistic_cdf logistic_l
 syntax keyword stanFunction gumbel
 syntax keyword stanFunction gumbel_lpdf gumbel_lupdf gumbel_cdf gumbel_lcdf gumbel_lccdf gumbel_rng
 
+syntax keyword stanFunction skew_double_exponential
+syntax keyword stanFunction skew_double_exponential_lpdf skew_double_exponential_lupdf skew_double_exponential_cdf skew_double_exponential_lcdf skew_double_exponential_lccdf skew_double_exponential_rng
+
 syntax keyword stanFunction lognormal
 syntax keyword stanFunction lognormal_lpdf lognormal_lupdf lognormal_cdf lognormal_lcdf lognormal_lccdf lognormal_rng
 
@@ -145,6 +149,9 @@ syntax keyword stanFunction frechet_lpdf frechet_lupdf frechet_cdf frechet_lcdf 
 syntax keyword stanFunction rayleigh
 syntax keyword stanFunction rayleigh_lpdf rayleigh_lupdf rayleigh_cdf rayleigh_lcdf rayleigh_lccdf rayleigh_rng
 
+syntax keyword stanFunction loglogistic
+syntax keyword stanFunction loglogistic_lpdf loglogistic_cdf loglogistic_rng loglogistic_log
+
 syntax keyword stanFunction wiener
 syntax keyword stanFunction wiener_lpdf wiener_lupdf
 
@@ -161,7 +168,7 @@ syntax keyword stanFunction beta_proportion
 syntax keyword stanFunction beta_proportion_lpdf beta_proportion_lupdf beta_proportion_lcdf beta_proportion_lccdf beta_proportion_rng
 
 syntax keyword stanFunction von_mises
-syntax keyword stanFunction von_mises_lpdf von_mises_lupdf von_mises_rng
+syntax keyword stanFunction von_mises_lpdf von_mises_lupdf von_mises_lcdf von_mises_lccdf von_mises_rng
 
 syntax keyword stanFunction uniform
 syntax keyword stanFunction uniform_lpdf uniform_lupdf uniform_cdf uniform_lcdf uniform_lccdf uniform_rng
@@ -184,6 +191,9 @@ syntax keyword stanFunction multi_gp_cholesky_lpdf multi_gp_cholesky_lupdf
 syntax keyword stanFunction multi_student_t
 syntax keyword stanFunction multi_student_t_lpdf multi_student_t_lupdf multi_student_t_rng
 
+syntax keyword stanFunction multi_student_t_cholesky
+syntax keyword stanFunction multi_student_t_cholesky_lpdf multi_student_t_cholesky_lupdf multi_student_t_cholesky_rng
+
 syntax keyword stanFunction gaussian_dlm_obs
 syntax keyword stanFunction gaussian_dlm_obs_lpdf gaussian_dlm_obs_lupdf
 
@@ -199,8 +209,14 @@ syntax keyword stanFunction lkj_corr_cholesky_lpdf lkj_corr_cholesky_lupdf lkj_c
 syntax keyword stanFunction wishart
 syntax keyword stanFunction wishart_lpdf wishart_lupdf wishart_rng
 
+syntax keyword stanFunction wishart_cholesky
+syntax keyword stanFunction wishart_cholesky_lpdf wishart_cholesky_lupdf wishart_cholesky_rng
+
 syntax keyword stanFunction inv_wishart
 syntax keyword stanFunction inv_wishart_lpdf inv_wishart_lupdf inv_wishart_rng
+
+syntax keyword stanFunction inv_wishart_cholesky
+syntax keyword stanFunction inv_wishart_cholesky_lpdf inv_wishart_cholesky_lupdf inv_wishart_cholesky_rng
 
 " Constants
 syntax keyword stanConstant pi e sqrt2 log2 log10
@@ -209,16 +225,18 @@ syntax keyword stanConstant not_a_number positive_infinity negative_infinity mac
 " Built in functions
 syntax keyword stanFunction print
 syntax keyword stanFunction abs int_step min max
-syntax keyword stanFunction step is_inf is_nan fabs fdim fmin fmax fmod floor ceil round trunc
+syntax keyword stanFunction get_real get_imag
+syntax keyword stanFunction step is_inf is_nan fdim fmin fmax fmod floor ceil round trunc
 syntax keyword stanFunction sqrt cbrt square exp exp2 log log2 log10 pow inv inv_sqrt inv_square
 syntax keyword stanFunction hypot cos sin tan acos asin atan atan2
 syntax keyword stanFunction cosh sinh tanh acosh asinh atanh
 syntax keyword stanFunction logit inv_logit inv_cloglog
-syntax keyword stanFunction erf erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
-syntax keyword stanFunction inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q binomial_coefficient_log choose
+syntax keyword stanFunction erf erfc inv_erfc Phi inv_Phi Phi_approx binary_log_loss owens_t
+syntax keyword stanFunction std_normal_qf std_normal_log_qf
+syntax keyword stanFunction inc_beta inv_inc_beta lbeta tgamma lgamma digamma trigamma lmgamma gamma_p gamma_q choose
 syntax keyword stanFunction bessel_first_kind bessel_second_kind modified_bessel_first_kind log_modified_bessel_first_kind modified_bessel_second_kind
 syntax keyword stanFunction falling_factorial lchoose log_falling_factorial rising_factorial log_rising_factorial
-syntax keyword stanFunction expm1 fma multiply_log ldexp lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
+syntax keyword stanFunction expm1 fma ldexp lmultiply log1p log1m log1p_exp log1m_exp log_diff_exp log_mix log_sum_exp log_inv_logit log1m_inv_logit
 syntax keyword stanFunction lambert_w0 lambert_wm1
 syntax keyword stanFunction min max sum prod log_sum_exp mean variance sd distance squared_distance
 syntax keyword stanFunction dims num_elements size
@@ -236,20 +254,29 @@ syntax keyword stanFunction linspaced_array linspaced_int_array linspaced_vector
 syntax keyword stanFunction col row block sub_col sub_row head tail segment
 syntax keyword stanFunction append_col append_row
 syntax keyword stanFunction softmax log_softmax cumulative_sum
-syntax keyword stanFunction cov_exp_quad
+syntax keyword stanFunction gp_exp_quad_cov gp_dot_prod_cov gp_matern32_cov gp_matern52_cov gp_periodic_cov
 syntax keyword stanFunction mdivide_left_tri_low mdivide_right_tri_low mdivide_left_spd mdivide_right_spd
-syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply matrix_power trace determinant log_determinant
+syntax keyword stanFunction matrix_exp matrix_exp_multiply scale_matrix_exp_multiply matrix_power trace determinant log_determinant log_determinant_spd
 syntax keyword stanFunction inverse inverse_spd chol2inv generalized_inverse eigenvalues_sym eigenvectors_sym qr_thin_Q qr_thin_R qr_Q qr_R cholesky_decompose singular_values svd_U svd_V
+syntax keyword stanFunction qr qr_thin eigendecompose_sym eigendecompose complex_schur_decompose svd csr_extract
+syntax keyword stanFunction eigenvectors eigenvalues
 syntax keyword stanFunction sort_asc sort_desc sort_indices_asc sort_indices_desc rank
 syntax keyword stanFunction csr_extract_w csr_extract_v csr_extract_u csr_to_dense_matrix csr_matrix_times_vector
-syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d
-syntax keyword stanFunction algebra_solver algebra_solver_newton
-syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol
-" The following integrade_ode functions are deprecated, but have not been removed.
-syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
-syntax keyword stanFunction integrate_1d
+syntax keyword stanFunction to_matrix to_vector to_row_vector to_array_2d to_array_1d to_complex
+syntax keyword stanFunction algebra_solver algebra_solver_newton solve_newton solve_newton_tol solve_powell solve_powell_tol
+syntax keyword stanFunction ode_rk45 ode_rk45_tol ode_adams ode_adams_tol ode_bdf ode_bdf_tol ode_adjoint_tol_ctl ode_ckrk ode_ckrk_tol
+syntax keyword stanFunction dae dae_tol
 syntax keyword stanFunction reduce_sum reduce_sum_static
 syntax keyword stanFunction map_rect
+syntax keyword stanFunction fft inv_fft fft2 inv_fft2
+syntax keyword stanFunction L1 L2
+syntax keyword stanFunction complex_schur_decompose_t complex_schur_decompose_u
+syntax keyword stanFunction conj
+
+" Deprecations
+syntax keyword stanFunction integrate_ode_rk45 integrate_ode integrate_ode_bdf integrate_ode_adams
+syntax keyword stanFunction integrate_1d
+syntax keyword stanFunction fabs
 
 " Control flow
 syntax keyword stanConditional if then else
@@ -267,26 +294,13 @@ syntax match stanOperator "\v\:"
 syntax match stanOperator "\v\'"
 syntax match stanOperator "\v\/"
 syntax match stanOperator "\v\.[*/]"
-syntax match stanOperator "\v\<\-"
 syntax match stanOperator "\v\\"
 
 " Removed some, since they're highlighted in other places
-syntax keyword stanCppConflict var fvar STAN_MAJOR STAN_MINOR STAN_PATCH STAN_MATH_MAJOR STAN_MATH_MINOR STAN_MATH_PATCH
-syntax keyword stanCppConflict alignas alignof and_eq asm auto bitand bitor bool
-syntax keyword stanCppConflict break case catch char char16_t char32_t class compl
-syntax keyword stanCppConflict const constexpr const_cast continue decltype default
-syntax keyword stanCppConflict delete do double dynamic_cast enum explicit
-syntax keyword stanCppConflict export extern float friend goto
-syntax keyword stanCppConflict inline long mutable namespace new noexcept
-syntax keyword stanCppConflict not not_eq nullptr operator or or_eq private
-syntax keyword stanCppConflict protected public register reinterpret_cast
-syntax keyword stanCppConflict short signed sizeof static static_assert static_cast
-syntax keyword stanCppConflict struct switch template this thread_local throw true
-syntax keyword stanCppConflict try typedef typeid typename union unsigned using
-syntax keyword stanCppConflict virtual void volatile wchar_t xor xor_eq
+syntax keyword stanCppConflict var auto break continue export extern static struct true typedef void
 syntax keyword stanOperator return
-syntax keyword stanSpecial lower upper offset multiplier
-syntax keyword stanKeyword target get_lp
+syntax keyword stanSpecial array lower upper offset multiplier log_prob_impl
+syntax keyword stanKeyword target
 
 " To do
 syntax keyword stanTodo TODO FIXME
@@ -296,7 +310,6 @@ syntax cluster stanCommentGroup contains=stanTodo,stanFuncDoc
 
 " Comments
 syntax match stanComment contains=@stanCommentGroup,@Spell "//.*"
-syntax match stanComment contains=@stanCommentGroup,@Spell "\#.*"
 syntax region stanComment start="/\*" end="\*/" contains=@stanCommentGroup,@Spell
 
 syntax match stanInclude "\v^\s*\#include"
