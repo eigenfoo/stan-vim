@@ -4,23 +4,22 @@ on: [push]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.6]
+        python-version: ["3", "3.10"]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests
-    - name: Run coverage test
-      run: |
-        python tests/test_function_coverage.py
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip" # caching pip dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r tests/requirements.txt
+      - name: Run coverage test
+        run: |
+          python tests/test_function_coverage.py
